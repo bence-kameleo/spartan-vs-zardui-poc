@@ -1,0 +1,7 @@
+/*
+ * Lets Tailwind see the classes used by @kameleo/ui-spartan and adds spartan's variants.
+ * Import after a stylesheet that loads Tailwind and defines the Kameleo colour tokens
+ * (currently @kameleo/ui/styles.css).
+ */
+@import '@spartan-ng/brain/hlm-tailwind-preset.css';
+@source './';

@@ -1,4 +1,4 @@
-<main class="mx-auto flex min-h-screen max-w-3xl flex-col gap-10 p-8">
+<main class="mx-auto flex min-h-screen max-w-5xl flex-col gap-8 p-8">
   <header class="flex items-center justify-between">
     <h1 class="text-2xl font-semibold">{{ title }}</h1>
     <button z-button zType="outline" (click)="darkMode.toggleTheme()">
@@ -6,26 +6,52 @@
     </button>
   </header>
 
-  <section class="flex flex-col gap-4">
-    <h2 class="text-sm font-medium text-muted-foreground">&#64;kameleo/ui</h2>
-    <div class="flex flex-wrap items-center gap-3">
-      <button z-button>Primary</button>
-      <button z-button zType="secondary">Secondary</button>
-      <button z-button zType="outline">Outline</button>
-      <button z-button zType="ghost">Ghost</button>
-      <button z-button zType="destructive">Destructive</button>
-    </div>
-    <input z-input class="max-w-sm" placeholder="Search profiles" />
-  </section>
+  <div class="grid gap-10 md:grid-cols-2">
+    <section class="flex flex-col gap-4" data-testid="zard">
+      <h2 class="text-lg font-semibold">ZardUI</h2>
 
-  <section class="flex flex-col gap-4">
-    <h2 class="text-sm font-medium text-muted-foreground">
-      &#64;kameleo/blocks
-    </h2>
-    <kb-login-form (submitted)="signIn($event)" />
-    @if (signedInAs(); as email) {
-    <p class="text-sm" data-testid="signed-in">Signed in as {{ email }}</p>
-    }
-  </section>
+      <h3 class="text-sm font-medium text-muted-foreground">&#64;kameleo/ui</h3>
+      <div class="flex flex-wrap items-center gap-3">
+        <button z-button>Primary</button>
+        <button z-button zType="secondary">Secondary</button>
+        <button z-button zType="outline">Outline</button>
+        <button z-button zType="ghost">Ghost</button>
+        <button z-button zType="destructive">Destructive</button>
+      </div>
+      <input z-input class="max-w-sm" placeholder="Search profiles" />
+
+      <h3 class="mt-4 text-sm font-medium text-muted-foreground">
+        &#64;kameleo/blocks: kb-login-form
+      </h3>
+      <kb-login-form (submitted)="zardSignIn($event)" />
+      @if (zardSignedInAs(); as email) {
+      <p class="text-sm">Signed in as {{ email }}</p>
+      }
+    </section>
+
+    <section class="flex flex-col gap-4" data-testid="spartan">
+      <h2 class="text-lg font-semibold">spartan/ui</h2>
+
+      <h3 class="text-sm font-medium text-muted-foreground">
+        &#64;kameleo/ui-spartan
+      </h3>
+      <div class="flex flex-wrap items-center gap-3">
+        <button hlmBtn>Primary</button>
+        <button hlmBtn variant="secondary">Secondary</button>
+        <button hlmBtn variant="outline">Outline</button>
+        <button hlmBtn variant="ghost">Ghost</button>
+        <button hlmBtn variant="destructive">Destructive</button>
+      </div>
+      <input hlmInput class="max-w-sm" placeholder="Search profiles" />
+
+      <h3 class="mt-4 text-sm font-medium text-muted-foreground">
+        &#64;kameleo/blocks: kb-spartan-login-form
+      </h3>
+      <kb-spartan-login-form (submitted)="spartanSignIn($event)" />
+      @if (spartanSignedInAs(); as email) {
+      <p class="text-sm">Signed in as {{ email }}</p>
+      }
+    </section>
+  </div>
 </main>
 <router-outlet></router-outlet>

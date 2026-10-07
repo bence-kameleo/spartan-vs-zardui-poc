@@ -15,7 +15,12 @@
     "skipDefaultLibCheck": true,
     "paths": {
       "@kameleo/ui": ["./libs/ui/src/index.ts"],
-      "@kameleo/blocks": ["./libs/blocks/src/index.ts"]
+      "@kameleo/blocks": ["./libs/blocks/src/index.ts"],
+      "@kameleo/ui-spartan": ["./libs/ui-spartan/src/index.ts"],
+      "@kameleo/ui-spartan/button": ["./libs/ui-spartan/button/src/index.ts"],
+      "@kameleo/ui-spartan/utils": ["./libs/ui-spartan/utils/src/index.ts"],
+      "@kameleo/ui-spartan/input": ["./libs/ui-spartan/input/src/index.ts"],
+      "@kameleo/ui-spartan/label": ["./libs/ui-spartan/label/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

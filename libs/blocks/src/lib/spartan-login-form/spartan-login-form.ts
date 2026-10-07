@@ -10,16 +10,18 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ZardButtonComponent, ZardInputComponent } from '@kameleo/ui';
+import { HlmButton } from '@kameleo/ui-spartan/button';
+import { HlmInput } from '@kameleo/ui-spartan/input';
+import { HlmLabel } from '@kameleo/ui-spartan/label';
 import { LoginCredentials } from '../login-credentials';
 
 @Component({
-  selector: 'kb-login-form',
-  imports: [ReactiveFormsModule, ZardButtonComponent, ZardInputComponent],
-  templateUrl: './login-form.html',
+  selector: 'kb-spartan-login-form',
+  imports: [ReactiveFormsModule, HlmButton, HlmInput, HlmLabel],
+  templateUrl: './spartan-login-form.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginForm {
+export class SpartanLoginForm {
   readonly heading = input('Sign in');
   readonly submitLabel = input('Sign in');
   readonly loading = input(false);

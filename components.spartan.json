@@ -1,0 +1,7 @@
+{
+  "componentsPath": "libs/ui-spartan",
+  "buildable": true,
+  "generateAs": "entrypoint",
+  "importAlias": "@kameleo/ui-spartan",
+  "style": "vega"
+}

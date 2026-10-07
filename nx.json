@@ -58,9 +58,9 @@
     }
   },
   "release": {
-    "projects": ["ui", "blocks"],
+    "projects": ["ui", "ui-helm", "blocks"],
     "version": {
-      "preVersionCommand": "npx nx run-many -t build -p ui blocks",
+      "preVersionCommand": "npx nx run-many -t build -p ui ui-helm blocks",
       "preserveMatchingDependencyRanges": false
     }
   }

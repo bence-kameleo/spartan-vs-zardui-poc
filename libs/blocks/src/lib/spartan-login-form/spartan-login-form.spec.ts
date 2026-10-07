@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LoginCredentials } from '../login-credentials';
-import { LoginForm } from './login-form';
+import { SpartanLoginForm } from './spartan-login-form';
 
-describe('LoginForm', () => {
-  let fixture: ComponentFixture<LoginForm>;
+describe('SpartanLoginForm', () => {
+  let fixture: ComponentFixture<SpartanLoginForm>;
   let element: HTMLElement;
   let emitted: LoginCredentials[];
 
@@ -22,9 +22,9 @@ describe('LoginForm', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoginForm],
+      imports: [SpartanLoginForm],
     }).compileComponents();
-    fixture = TestBed.createComponent(LoginForm);
+    fixture = TestBed.createComponent(SpartanLoginForm);
     element = fixture.nativeElement;
     emitted = [];
     fixture.componentInstance.submitted.subscribe((value) =>

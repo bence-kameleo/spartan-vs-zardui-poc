@@ -4,7 +4,8 @@
   "peerDependencies": {
     "@angular/core": "^22.1.0",
     "@angular/forms": "^22.1.0",
-    "@kameleo/ui": "^0.0.1"
+    "@kameleo/ui": "^0.0.1",
+    "@kameleo/ui-spartan": "^0.0.1"
   },
   "sideEffects": false,
   "exports": {

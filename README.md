@@ -2,13 +2,16 @@
 
 Nx monorepo with two Angular apps and two publishable Angular libraries built on [ZardUI](https://zardui.com/) with the Kameleo colour scheme (primary `#57d770`).
 
-| Project           | Path          | Purpose                                               |
-| ----------------- | ------------- | ----------------------------------------------------- |
-| `app1`, `app2`    | `apps/`       | Demo apps consuming both libraries                    |
-| `@kameleo/ui`     | `libs/ui`     | Base components (button, input) and the Kameleo theme |
-| `@kameleo/blocks` | `libs/blocks` | Composed elements built from `@kameleo/ui`            |
+| Project               | Path              | Purpose                                                                                                      |
+| --------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------ |
+| `app1`, `app2`        | `apps/`           | Demo apps consuming both libraries                                                                           |
+| `@kameleo/ui`         | `libs/ui`         | Base components (button, input) and the Kameleo theme                                                        |
+| `@kameleo/ui-spartan` | `libs/ui-spartan` | The same base components from [spartan/ui](https://spartan.ng/), for comparison (Nx project name: `ui-helm`) |
+| `@kameleo/blocks`     | `libs/blocks`     | Composed elements built from `@kameleo/ui`                                                                   |
 
-Dependencies only go one way: app → `blocks` → `ui`. ESLint enforces this.
+Both apps show the ZardUI and the spartan variants side by side, including a login form block built on each (`kb-login-form`, `kb-spartan-login-form`).
+
+Dependencies only go one way: app → `blocks` → `ui` / `ui-spartan`. ESLint enforces this.
 
 ## Commands
 
@@ -27,6 +30,14 @@ npm run ui:add -- badge
 ```
 
 This runs the ZardUI CLI and rewrites the generated `@/shared/...` imports to relative ones, because the alias would end up unresolved in the published package. Afterwards export the component from `libs/ui/src/index.ts`.
+
+## Adding a spartan component
+
+```sh
+npm run ui-spartan:add -- checkbox
+```
+
+Each component becomes its own entry point, e.g. `@kameleo/ui-spartan/checkbox`. ZardUI and spartan both read `components.json` from the workspace root, so spartan's config is kept in `components.spartan.json` and the script swaps it in for the run.
 
 ## Theme
 
