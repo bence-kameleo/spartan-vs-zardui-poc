@@ -1,0 +1,3 @@
+/* Lets Tailwind see the classes used by @kameleo/blocks. Import after @kameleo/ui/styles.css. */
+@source './lib';
+@source './fesm2022';

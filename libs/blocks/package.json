@@ -2,8 +2,14 @@
   "name": "@kameleo/blocks",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "^22.1.0",
-    "@angular/core": "^22.1.0"
+    "@angular/core": "^22.1.0",
+    "@angular/forms": "^22.1.0",
+    "@kameleo/ui": "^0.0.1"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "exports": {
+    "./styles.css": {
+      "default": "./styles.css"
+    }
+  }
 }

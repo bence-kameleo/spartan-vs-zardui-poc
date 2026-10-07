@@ -1,13 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NxWelcome } from './nx-welcome';
+import { LoginCredentials, LoginForm } from '@kameleo/blocks';
+import {
+  ZardButtonComponent,
+  ZardDarkMode,
+  ZardInputComponent,
+} from '@kameleo/ui';
 
 @Component({
-  imports: [NxWelcome, RouterModule],
+  imports: [RouterModule, LoginForm, ZardButtonComponent, ZardInputComponent],
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App {
-  protected title = 'app2';
+  protected readonly title = 'app2';
+  protected readonly darkMode = inject(ZardDarkMode);
+  protected readonly signedInAs = signal<string | null>(null);
+
+  protected signIn(credentials: LoginCredentials): void {
+    this.signedInAs.set(credentials.email);
+  }
 }

@@ -1,1 +1,1 @@
-export * from './lib/blocks/blocks';
+export * from './lib/login-form/login-form';

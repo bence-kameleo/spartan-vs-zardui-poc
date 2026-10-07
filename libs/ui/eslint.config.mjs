@@ -12,6 +12,8 @@ export default [
         'error',
         {
           ignoredFiles: ['{projectRoot}/eslint.config.{js,cjs,mjs,ts,cts,mts}'],
+          // Required by the shipped styles.css, not by TypeScript code.
+          ignoredDependencies: ['tailwindcss', 'tailwindcss-animate'],
         },
       ],
     },
@@ -38,6 +40,14 @@ export default [
           style: 'kebab-case',
         },
       ],
+    },
+  },
+  {
+    // ZardUI sources added by `npm run ui:add` keep their upstream `z` selectors.
+    files: ['**/src/lib/shared/**/*.ts'],
+    rules: {
+      '@angular-eslint/directive-selector': 'off',
+      '@angular-eslint/component-selector': 'off',
     },
   },
   {

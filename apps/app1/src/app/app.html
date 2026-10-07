@@ -1,2 +1,31 @@
-<app-nx-welcome></app-nx-welcome>
+<main class="mx-auto flex min-h-screen max-w-3xl flex-col gap-10 p-8">
+  <header class="flex items-center justify-between">
+    <h1 class="text-2xl font-semibold">{{ title }}</h1>
+    <button z-button zType="outline" (click)="darkMode.toggleTheme()">
+      {{ darkMode.themeMode() === 'dark' ? 'Light mode' : 'Dark mode' }}
+    </button>
+  </header>
+
+  <section class="flex flex-col gap-4">
+    <h2 class="text-sm font-medium text-muted-foreground">&#64;kameleo/ui</h2>
+    <div class="flex flex-wrap items-center gap-3">
+      <button z-button>Primary</button>
+      <button z-button zType="secondary">Secondary</button>
+      <button z-button zType="outline">Outline</button>
+      <button z-button zType="ghost">Ghost</button>
+      <button z-button zType="destructive">Destructive</button>
+    </div>
+    <input z-input class="max-w-sm" placeholder="Search profiles" />
+  </section>
+
+  <section class="flex flex-col gap-4">
+    <h2 class="text-sm font-medium text-muted-foreground">
+      &#64;kameleo/blocks
+    </h2>
+    <kb-login-form (submitted)="signIn($event)" />
+    @if (signedInAs(); as email) {
+    <p class="text-sm" data-testid="signed-in">Signed in as {{ email }}</p>
+    }
+  </section>
+</main>
 <router-outlet></router-outlet>

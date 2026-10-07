@@ -1,1 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+/* Kameleo theme + Tailwind. Outside this monorepo import '@kameleo/ui/styles.css' and '@kameleo/blocks/styles.css'. */
+@import '../../../libs/ui/src/styles.css';
+@import '../../../libs/blocks/src/styles.css';
+@source './';
