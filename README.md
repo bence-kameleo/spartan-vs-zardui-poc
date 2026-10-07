@@ -1,109 +1,60 @@
-# New Nx Repository
+# platform-test
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+Nx monorepo with two Angular apps and two publishable Angular libraries built on [ZardUI](https://zardui.com/) with the Kameleo colour scheme (primary `#57d770`).
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+| Project           | Path          | Purpose                                               |
+| ----------------- | ------------- | ----------------------------------------------------- |
+| `app1`, `app2`    | `apps/`       | Demo apps consuming both libraries                    |
+| `@kameleo/ui`     | `libs/ui`     | Base components (button, input) and the Kameleo theme |
+| `@kameleo/blocks` | `libs/blocks` | Composed elements built from `@kameleo/ui`            |
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/docs/technologies/typescript/introduction?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+Dependencies only go one way: app → `blocks` → `ui`. ESLint enforces this.
 
-🚀 If you haven't connected to Nx Cloud yet, [complete your setup here](https://cloud.nx.app/get-started). Get faster builds with remote caching, distributed task execution, and self-healing CI. [See how your workspace can benefit](#nx-cloud).
-
-## Generate a library
-
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
-```
-
-## Run tasks
-
-To build the library use:
+## Commands
 
 ```sh
-npx nx run pkg1:build
+npm run start:app1   # http://localhost:4300
+npm run start:app2   # http://localhost:4301
+npm run build        # build libraries and apps
+npm run test
+npm run lint
 ```
 
-To run any task with Nx use:
+## Adding a ZardUI component
 
 ```sh
-npx nx run <project-name>:<target>
+npm run ui:add -- badge
 ```
 
-These targets are either [inferred automatically](https://nx.dev/docs/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+This runs the ZardUI CLI and rewrites the generated `@/shared/...` imports to relative ones, because the alias would end up unresolved in the published package. Afterwards export the component from `libs/ui/src/index.ts`.
 
-[More about running tasks in the docs &raquo;](https://nx.dev/docs/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## Theme
 
-## Versioning and releasing
+All colour tokens live in `libs/ui/src/styles.css` (light in `:root`, dark in `.dark`). Apps start in light mode; `ZardDarkMode.toggleTheme()` switches and remembers the choice.
 
-To version and release the library use
+## Using the libraries in an app
 
+Register the provider:
+
+```ts
+import { provideKameleoUi } from '@kameleo/ui';
+
+export const appConfig = { providers: [provideKameleoUi()] };
 ```
-npx nx release
+
+Import the styles in the app's global stylesheet (the app needs Tailwind v4 with `@tailwindcss/postcss`):
+
+```css
+@import '@kameleo/ui/styles.css';
+@import '@kameleo/blocks/styles.css';
 ```
 
-Pass `--dry-run` to see what would happen without actually releasing the library.
+Inside this monorepo the apps import the same files by relative path.
 
-[Learn more about Nx release &raquo;](https://nx.dev/docs/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## Publishing
 
-## Keep TypeScript project references up to date
-
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
-
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
+Both libraries build to `dist/libs/*` and are versioned together with `nx release`. No registry is configured yet: add it to `.npmrc` (`@kameleo:registry=<url>`) before the first publish.
 
 ```sh
-npx nx sync
+npx nx release 0.1.0 --dry-run --first-release
 ```
-
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
-
-```sh
-npx nx sync:check
-```
-
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
-
-## Nx Cloud
-
-Nx Cloud ensures a [fast and scalable CI](https://nx.dev/nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
-
-- [Remote caching](https://nx.dev/docs/features/ci-features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/docs/features/ci-features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/docs/features/ci-features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/docs/features/ci-features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Set up CI (non-Github Actions CI)
-
-**Note:** This is only required if your CI provider is not GitHub Actions.
-
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
-```
-
-[Learn more about Nx on CI](https://nx.dev/docs/features/ci-features?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/docs/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## 🔗 Learn More
-
-- [Nx Documentation](https://nx.dev/docs)
-- [Crafting Your Workspace Tutorial](https://nx.dev/docs/getting-started/tutorials/crafting-your-workspace)
-- [Module Boundaries](https://nx.dev/docs/features/enforce-module-boundaries)
-- [Releasing Packages](https://nx.dev/docs/features/manage-releases)
-- [Nx Plugins](https://nx.dev/docs/concepts/nx-plugins)
-- [Nx Cloud](https://nx.dev/nx-cloud)
-
-## 💬 Community
-
-Join the Nx community:
-
-- [Discord](https://go.nx.dev/community)
-- [X (Twitter)](https://twitter.com/nxdevtools)
-- [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [YouTube](https://www.youtube.com/@nxdevtools)
-- [Blog](https://nx.dev/blog)

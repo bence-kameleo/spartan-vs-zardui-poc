@@ -50,7 +50,7 @@
       "executor": "@angular/build:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "port": 4200
+        "port": 4300
       },
       "configurations": {
         "production": {
@@ -75,7 +75,7 @@
       "executor": "@nx/web:file-server",
       "options": {
         "buildTarget": "app1:build",
-        "port": 4200,
+        "port": 4300,
         "staticFilePath": "dist/apps/app1/browser",
         "spa": true
       }

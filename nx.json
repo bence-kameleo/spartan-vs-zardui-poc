@@ -60,7 +60,8 @@
   "release": {
     "projects": ["ui", "blocks"],
     "version": {
-      "preVersionCommand": "npx nx run-many -t build -p ui blocks"
+      "preVersionCommand": "npx nx run-many -t build -p ui blocks",
+      "preserveMatchingDependencyRanges": false
     }
   }
 }
